@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shreya Kumar | Data Scientist & Violinist</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0fdfa',
+                            100: '#ccfbf1',
+                            500: '#14b8a6',
+                            600: '#0d9488',
+                            700: '#0f766e',
+                            800: '#115e59',
+                            900: '#134e4a',
+                        },
+                        violetBrand: {
+                            500: '#8b5cf6',
+                            600: '#7c3aed',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts & FontAwesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #14b8a6 0%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .glass-card {
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        html.light .glass-card {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+        }
+        html.light {
+            background-color: #f8fafc;
+            color: #0f172a;
+        }
+        html.light nav {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-color: rgba(226, 232, 240, 0.8);
+        }
+        html.light .nav-text {
+            color: #334155;
+        }
+        html.light .section-bg {
+            background-color: #ffffff;
+        }
+        html.light .card-text-muted {
+            color: #64748b;
+        }
+        html.light .card-title {
+            color: #0f172a;
+        }
+        html.light .tech-badge {
+            background-color: #e2e8f0;
+            color: #1e293b;
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between">
+
+    <!-- Navbar -->
+    <nav class="fixed top-0 left-0 w-full z-50 bg-slate-950/80 backdrop-blur-md border-b border-slate-800/80 transition-colors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <a href="#hero" class="text-xl font-bold tracking-tight text-white flex items-center gap-2">
+                    <span class="w-8 h-8 rounded-lg bg-gradient-to-tr from-brand-500 to-violetBrand-500 flex items-center justify-center text-white font-black text-sm">SK</span>
+                    <span class="card-title">Shreya <span class="text-brand-500">Kumar</span></span>
+                </a>
+
+                <div class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-300 nav-text">
+                    <a href="#about" class="hover:text-brand-500 transition-colors">About</a>
+                    <a href="#experience" class="hover:text-brand-500 transition-colors">Experience</a>
+                    <a href="#lottery-project" class="hover:text-brand-500 transition-colors">Lottery Visualizations</a>
+                    <a href="#music" class="hover:text-brand-500 transition-colors">Music & Arts</a>
+                    <a href="#contact" class="hover:text-brand-500 transition-colors">Contact</a>
+                </div>
+
+                <div class="flex items-center gap-3">
+                    <button id="themeToggle" class="p-2.5 rounded-xl bg-slate-800 text-slate-300 hover:text-white transition-all shadow-sm border border-slate-700/50" title="Toggle Theme">
+                        <i class="fa-solid fa-moon dark:hidden text-indigo-600"></i>
+                        <i class="fa-solid fa-sun hidden dark:block text-amber-400"></i>
+                    </button>
+                    <a href="mailto:shreya@ucsd.edu" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold text-white bg-brand-600 hover:bg-brand-500 rounded-xl shadow-md transition-all">
+                        <i class="fa-solid fa-envelope"></i> Email Me
+                    </a>
+                    <button id="mobileMenuBtn" class="md:hidden p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800">
+                        <i class="fa-solid fa-bars text-lg"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="mobileMenu" class="hidden md:hidden bg-slate-900 border-b border-slate-800 px-4 pt-2 pb-4 space-y-2 text-sm font-medium text-slate-300">
+            <a href="#about" class="mobile-link block py-2 hover:text-brand-500">About</a>
+            <a href="#experience" class="mobile-link block py-2 hover:text-brand-500">Experience</a>
+            <a href="#lottery-project" class="mobile-link block py-2 hover:text-brand-500">Lottery Visualizations</a>
+            <a href="#music" class="mobile-link block py-2 hover:text-brand-500">Music & Arts</a>
+            <a href="#contact" class="mobile-link block py-2 hover:text-brand-500">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden">
+        <div class="absolute inset-0 pointer-events-none">
+            <div class="absolute -top-24 -left-20 w-96 h-96 bg-brand-500/10 rounded-full blur-3xl"></div>
+            <div class="absolute top-1/2 -right-20 w-96 h-96 bg-violetBrand-500/10 rounded-full blur-3xl"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-900/80 border border-slate-800 text-xs text-brand-500 font-medium shadow-sm">
+                        <span class="w-2 h-2 rounded-full bg-brand-500 animate-pulse"></span>
+                        Data Science & Statistics @ UC San Diego
+                    </div>
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white card-title leading-tight">
+                        Shreya <span class="gradient-text">Kumar</span>
+                    </h1>
+                    <p class="text-lg sm:text-xl font-semibold text-slate-300 card-title">
+                        Data Science & Statistics Major at UCSD | Music Minor
+                    </p>
+                    <p class="text-slate-400 card-text-muted text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                        5+ years of experience in Python (Pandas, NumPy, SciPy, Scikit-Learn, Matplotlib, Seaborn) and R (ggplot2, Tidyverse, dplyr). Experienced in telemetry analytics, probability distribution modeling, and classical violin performance.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
+                        <a href="mailto:shreya@ucsd.edu" class="w-full sm:w-auto px-6 py-3 rounded-xl bg-gradient-to-r from-brand-600 to-brand-500 hover:from-brand-500 hover:to-brand-400 text-white font-semibold shadow-lg shadow-brand-500/20 text-center transition-all flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-paper-plane"></i> Contact Me (shreya@ucsd.edu)
+                        </a>
+                        <a href="#lottery-project" class="w-full sm:w-auto px-6 py-3 rounded-xl bg-slate-900 border border-slate-800 hover:bg-slate-800 text-slate-200 font-semibold text-center transition-all flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-chart-pie"></i> View Lottery Data Viz
+                        </a>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-5">
+                    <div class="relative mx-auto max-w-md lg:max-w-none">
+                        <div class="relative glass-card rounded-2xl p-6 shadow-2xl border border-slate-800 text-slate-300">
+                            <div class="flex items-center justify-between pb-4 border-b border-slate-800/80">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-full bg-brand-500/20 border border-brand-500/40 flex items-center justify-center text-brand-400">
+                                        <i class="fa-solid fa-chart-line"></i>
+                                    </div>
+                                    <div>
+                                        <h2 class="text-sm font-bold text-white card-title">Profile Overview</h2>
+                                        <p class="text-xs text-slate-400 card-text-muted">UC San Diego Scholar</p>
+                                    </div>
+                                </div>
+                                <span class="text-xs px-2.5 py-1 rounded-full bg-brand-500/10 text-brand-400 font-mono">Data & Stats</span>
+                            </div>
+
+                            <div class="space-y-3 py-4 text-xs font-mono">
+                                <div class="bg-slate-950/80 p-3.5 rounded-xl border border-slate-800/80">
+                                    <span class="text-purple-400">const</span> <span class="text-blue-300">shreyaKumar</span> = {<br>
+                                    &nbsp;&nbsp;<span class="text-slate-400">university:</span> <span class="text-emerald-300">'UC San Diego'</span>,<br>
+                                    &nbsp;&nbsp;<span class="text-slate-400">major:</span> <span class="text-emerald-300">'Data Science & Statistics'</span>,<br>
+                                    &nbsp;&nbsp;<span class="text-slate-400">minor:</span> <span class="text-emerald-300">'Music'</span>,<br>
+                                    &nbsp;&nbsp;<span class="text-slate-400">toolkit:</span> [<span class="text-emerald-300">'Python'</span>, <span class="text-emerald-300">'Pandas'</span>, <span class="text-emerald-300">'R'</span>],<br>
+                                    &nbsp;&nbsp;<span class="text-slate-400">racingResearch:</span> <span class="text-emerald-300">'23XI Racing / UNCC'</span><br>
+                                    };
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-3 gap-2 text-center pt-1">
+                                <div class="bg-slate-950/60 p-2 rounded-lg border border-slate-800">
+                                    <div class="text-base font-bold text-brand-400">5+ Yrs</div>
+                                    <div class="text-[10px] text-slate-400 uppercase tracking-wider">Python & R</div>
+                                </div>
+                                <div class="bg-slate-950/60 p-2 rounded-lg border border-slate-800">
+                                    <div class="text-base font-bold text-violet-400">4 Mos</div>
+                                    <div class="text-[10px] text-slate-400 uppercase tracking-wider">23XI Racing</div>
+                                </div>
+                                <div class="bg-slate-950/60 p-2 rounded-lg border border-slate-800">
+                                    <div class="text-base font-bold text-amber-400">12+ Yrs</div>
+                                    <div class="text-[10px] text-slate-400 uppercase tracking-wider">Violin</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience & Education Section -->
+    <section id="experience" class="py-20 bg-slate-900/50 section-bg border-y border-slate-800/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs uppercase tracking-widest text-brand-500 font-bold mb-2">Academic & Professional Journey</h2>
+                <p class="text-3xl sm:text-4xl font-extrabold text-white card-title">Experience & Education</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                
+                <div class="lg:col-span-5 glass-card p-8 rounded-2xl border border-slate-800 flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-brand-500/10 flex items-center justify-center text-brand-400 text-xl mb-6">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                        </div>
+                        <span class="text-xs font-mono text-brand-400 uppercase tracking-wider">Education</span>
+                        <h3 class="text-2xl font-bold text-white card-title mt-1 mb-2">University of California, San Diego (UCSD)</h3>
+                        <p class="text-slate-300 font-semibold text-base mb-2">B.S. Data Science & Statistics</p>
+                        <p class="text-violet-400 font-medium text-sm mb-4"><i class="fa-solid fa-music mr-1.5"></i> Music Minor</p>
+                        <p class="text-slate-400 card-text-muted text-sm leading-relaxed">
+                            Focusing on statistical inference, probability theory, exploratory data analysis, data structures, and musicology.
+                        </p>
+                    </div>
+
+                    <div class="pt-6 mt-6 border-t border-slate-800/80">
+                        <h4 class="text-xs uppercase font-bold text-slate-400 card-text-muted mb-3">Core Toolkit</h4>
+                        <div class="flex flex-wrap gap-2 text-xs font-medium">
+                            <span class="px-3 py-1.5 rounded-lg bg-slate-950 text-slate-200 border border-slate-800 tech-badge"><i class="fa-brands fa-python text-amber-400 mr-1"></i> Python (5+ Yrs)</span>
+                            <span class="px-3 py-1.5 rounded-lg bg-slate-950 text-slate-200 border border-slate-800 tech-badge"><i class="fa-solid fa-table text-emerald-400 mr-1"></i> Pandas & NumPy</span>
+                            <span class="px-3 py-1.5 rounded-lg bg-slate-950 text-slate-200 border border-slate-800 tech-badge"><i class="fa-solid fa-brain text-purple-400 mr-1"></i> Scikit-Learn & SciPy</span>
+                            <span class="px-3 py-1.5 rounded-lg bg-slate-950 text-slate-200 border border-slate-800 tech-badge"><i class="fa-solid fa-chart-simple text-sky-400 mr-1"></i> R (ggplot2, Tidyverse)</span>
+                            <span class="px-3 py-1.5 rounded-lg bg-slate-950 text-slate-200 border border-slate-800 tech-badge"><i class="fa-solid fa-chart-area text-rose-400 mr-1"></i> Matplotlib & Seaborn</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-7 glass-card p-8 rounded-2xl border border-slate-800 flex flex-col justify-between">
+                    <div>
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-6">
+                            <div class="inline-flex items-center gap-2 text-xs font-semibold px-3 py-1 rounded-full bg-red-500/10 text-red-400 border border-red-500/20 w-fit">
+                                <i class="fa-solid fa-flag-checkered"></i> NASCAR Telemetry Analytics
+                            </div>
+                            <span class="text-xs font-mono text-slate-400 bg-slate-800/80 px-3 py-1 rounded-md w-fit">4 Months @ UNCC</span>
+                        </div>
+
+                        <h3 class="text-2xl font-bold text-white card-title mb-1">23XI Racing (MJ NASCAR Team) Collaboration</h3>
+                        <p class="text-brand-400 text-sm font-semibold mb-4">Data Analytics Researcher at UNCC</p>
+
+                        <p class="text-slate-300 card-text-muted text-sm leading-relaxed mb-6">
+                            Spent four months at UNCC working directly with telemetry datasets from 23XI Racing—Michael Jordan's professional NASCAR team.
+                        </p>
+
+                        <ul class="space-y-3 text-slate-300 card-text-muted text-sm">
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-circle-check text-brand-400 mt-1"></i>
+                                <span>Engineered data cleaning pipelines using Python (Pandas) and R to process high-frequency car telemetry streams.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-circle-check text-brand-400 mt-1"></i>
+                                <span>Analyzed lap time degradation, tire wear dynamics, and pit strategy variables for race optimization.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-circle-check text-brand-400 mt-1"></i>
+                                <span>Delivered empirical visualization dashboards highlighting key performance drivers across varied track layouts.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="flex flex-wrap gap-2 mt-8 pt-6 border-t border-slate-800/80 text-xs font-mono text-slate-400">
+                        <span class="px-2.5 py-1 rounded bg-slate-950 text-slate-300 border border-slate-800 tech-badge">Telemetry Analysis</span>
+                        <span class="px-2.5 py-1 rounded bg-slate-950 text-slate-300 border border-slate-800 tech-badge">Python Pandas</span>
+                        <span class="px-2.5 py-1 rounded bg-slate-950 text-slate-300 border border-slate-800 tech-badge">R Tidyverse</span>
+                        <span class="px-2.5 py-1 rounded bg-slate-950 text-slate-300 border border-slate-800 tech-badge">Race Strategy</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Lottery Data Visualizations Showcase -->
+    <section id="lottery-project" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+                <div>
+                    <h2 class="text-xs uppercase tracking-widest text-brand-500 font-bold mb-2">Featured Research</h2>
+                    <p class="text-3xl sm:text-4xl font-extrabold text-white card-title">Lottery Data Visualizations</p>
+                    <p class="text-slate-400 card-text-muted text-sm mt-2 max-w-2xl">
+                        Exploratory statistical analysis mapping bet volume distributions, jackpot prize pool fluctuations, calendar heatmaps, and quarterly time series.
+                    </p>
+                </div>
+                <div class="mt-4 md:mt-0 text-xs text-brand-400 flex items-center gap-2 bg-brand-500/10 px-3 py-2 rounded-lg border border-brand-500/20">
+                    <i class="fa-solid fa-magnifying-glass-plus"></i> Click any plot to open interactive full-screen modal
+                </div>
+            </div>
+
+            <!-- 6 Visualizations Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <!-- Viz 1: Average & Total Ryo Bet per Month -->
+                <div class="gallery-item group rounded-2xl overflow-hidden glass-card border border-slate-800 hover:border-brand-500 transition-all duration-300 cursor-pointer shadow-lg flex flex-col justify-between"
+                     onclick="openLightbox('./unnamed (17).png', 'Average & Total Ryo Bet per Month', 'Monthly bar charts comparing average monthly bet amounts against the yearly benchmark of 787k, alongside cumulative monthly bet sums.')">
+                    <div class="w-full bg-slate-950 p-4 relative flex items-center justify-center">
+                        <img src="./unnamed (17).png" alt="Average & Total Ryo Bet per Month" class="w-full h-48 object-contain rounded-lg">
+                        <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <span class="p-3 rounded-full bg-brand-500 text-white shadow-xl"><i class="fa-solid fa-expand"></i></span>
+                        </div>
+                    </div>
+                    <div class="p-5 bg-slate-900/90 border-t border-slate-800/80">
+                        <span class="text-[10px] font-mono text-brand-400 uppercase font-bold">Visualization 01</span>
+                        <h4 class="text-base font-bold text-white card-title mt-0.5">Average & Total Ryo Bet per Month</h4>
+                        <p class="text-xs text-slate-400 card-text-muted mt-1">Highlights peak betting months (April/May) against the 787k yearly average baseline.</p>
+                    </div>
+                </div>
+
+                <!-- Viz 2: Highest and Lowest Prize Pools -->
+                <div class="gallery-item group rounded-2xl overflow-hidden glass-card border border-slate-800 hover:border-brand-500 transition-all duration-300 cursor-pointer shadow-lg flex flex-col justify-between"
+                     onclick="openLightbox('./unnamed (16).png', 'Highest and Lowest Prize Pools', 'Comparative horizontal bar plots mapping the top 5 largest prize pools (up to ~2.9M) vs bottom 5 smallest prize pools.')">
+                    <div class="w-full bg-slate-950 p-4 relative flex items-center justify-center">
+                        <img src="./unnamed (16).png" alt="Highest and Lowest Prize Pools" class="w-full h-48 object-contain rounded-lg">
+                        <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <span class="p-3 rounded-full bg-brand-500 text-white shadow-xl"><i class="fa-solid fa-expand"></i></span>
+                        </div>
+                    </div>
+                    <div class="p-5 bg-slate-900/90 border-t border-slate-800/80">
+                        <span class="text-[10px] font-mono text-violet-400 uppercase font-bold">Visualization 02</span>
+                        <h4 class="text-base font-bold text-white card-title mt-0.5">Highest and Lowest Prize Pools</h4>
+                        <p class="text-xs text-slate-400 card-text-muted mt-1">Ranks top 5 jackpot dates vs. low-volume pool events.</p>
+                    </div>
+                </div>
+
+                <!-- Viz 3: 2025 Heatmap -->
+                <div class="gallery-item group rounded-2xl overflow-hidden glass-card border border-slate-800 hover:border-brand-500 transition-all duration-300 cursor-pointer shadow-lg flex flex-col justify-between"
+                     onclick="openLightbox('./unnamed (15).png', '2025 Heatmap Analysis', 'Detailed month vs day heatmap showing daily lottery activity spikes across the entire calendar year 2025.')">
+                    <div class="w-full bg-slate-950 p-4 relative flex items-center justify-center">
+                        <img src="./unnamed (15).png" alt="2025 Heatmap Analysis" class="w-full h-48 object-contain rounded-lg">
+                        <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <span class="p-3 rounded-full bg-brand-500 text-white shadow-xl"><i class="fa-solid fa-expand"></i></span>
+                        </div>
+                    </div>
+                    <div class="p-5 bg-slate-900/90 border-t border-slate-800/80">
+                        <span class="text-[10px] font-mono text-sky-400 uppercase font-bold">Visualization 03</span>
+                        <h4 class="text-base font-bold text-white card-title mt-0.5">2025 Heatmap Analysis</h4>
+                        <p class="text-xs text-slate-400 card-text-muted mt-1">Calendar day-by-month color density matrix of draw totals.</p>
+                    </div>
+                </div>
+
+                <!-- Viz 4: Distribution by Day of Week -->
+                <div class="gallery-item group rounded-2xl overflow-hidden glass-card border border-slate-800 hover:border-brand-500 transition-all duration-300 cursor-pointer shadow-lg flex flex-col justify-between"
+                     onclick="openLightbox('./unnamed (14).png', 'Distribution by Day of Week', 'Boxplot visualization mapping variance, medians, IQRs, and outliers in prize pool sizes Monday through Sunday.')">
+                    <div class="w-full bg-slate-950 p-4 relative flex items-center justify-center">
+                        <img src="./unnamed (14).png" alt="Distribution by Day of Week" class="w-full h-48 object-contain rounded-lg">
+                        <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <span class="p-3 rounded-full bg-brand-500 text-white shadow-xl"><i class="fa-solid fa-expand"></i></span>
+                        </div>
+                    </div>
+                    <div class="p-5 bg-slate-900/90 border-t border-slate-800/80">
+                        <span class="text-[10px] font-mono text-amber-400 uppercase font-bold">Visualization 04</span>
+                        <h4 class="text-base font-bold text-white card-title mt-0.5">Distribution by Day of Week</h4>
+                        <p class="text-xs text-slate-400 card-text-muted mt-1">Boxplot spread showing higher weekend prize pool variations.</p>
+                    </div>
+                </div>
+
+                <!-- Viz 5: Pool Size Distribution & Cumulative Pool -->
+                <div class="gallery-item group rounded-2xl overflow-hidden glass-card border border-slate-800 hover:border-brand-500 transition-all duration-300 cursor-pointer shadow-lg flex flex-col justify-between"
+                     onclick="openLightbox('./unnamed (13).png', 'Pool Size Distribution & Cumulative Pool', 'Dual subplot containing a KDE pool size distribution histogram alongside a cumulative pool growth line chart reaching ~280M.')">
+                    <div class="w-full bg-slate-950 p-4 relative flex items-center justify-center">
+                        <img src="./unnamed (13).png" alt="Pool Size Distribution & Cumulative Pool" class="w-full h-48 object-contain rounded-lg">
+                        <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <span class="p-3 rounded-full bg-brand-500 text-white shadow-xl"><i class="fa-solid fa-expand"></i></span>
+                        </div>
+                    </div>
+                    <div class="p-5 bg-slate-900/90 border-t border-slate-800/80">
+                        <span class="text-[10px] font-mono text-pink-400 uppercase font-bold">Visualization 05</span>
+                        <h4 class="text-base font-bold text-white card-title mt-0.5">Pool Size & Cumulative Growth</h4>
+                        <p class="text-xs text-slate-400 card-text-muted mt-1">Histogram KDE frequency curve alongside cumulative growth trajectory.</p>
+                    </div>
+                </div>
+
+                <!-- Viz 6: Quarter-Wise Lottery Poll (2025) -->
+                <div class="gallery-item group rounded-2xl overflow-hidden glass-card border border-slate-800 hover:border-brand-500 transition-all duration-300 cursor-pointer shadow-lg flex flex-col justify-between"
+                     onclick="openLightbox('./unnamed (12).png', 'Quarter-Wise Lottery Poll (2025)', 'Four-panel time series breakdown tracking daily lottery activity across Q1, Q2, Q3, and Q4 of 2025.')">
+                    <div class="w-full bg-slate-950 p-4 relative flex items-center justify-center">
+                        <img src="./unnamed (12).png" alt="Quarter-Wise Lottery Poll (2025)" class="w-full h-48 object-contain rounded-lg">
+                        <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <span class="p-3 rounded-full bg-brand-500 text-white shadow-xl"><i class="fa-solid fa-expand"></i></span>
+                        </div>
+                    </div>
+                    <div class="p-5 bg-slate-900/90 border-t border-slate-800/80">
+                        <span class="text-[10px] font-mono text-emerald-400 uppercase font-bold">Visualization 06</span>
+                        <h4 class="text-base font-bold text-white card-title mt-0.5">Quarter-Wise Poll (2025)</h4>
+                        <p class="text-xs text-slate-400 card-text-muted mt-1">Sequential time-series decomposition tracking quarterly daily fluctuations.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Music & Performance Section -->
+    <section id="music" class="py-20 bg-slate-900/50 section-bg border-y border-slate-800/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <div class="lg:col-span-7 space-y-6">
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-violetBrand-500/10 border border-violetBrand-500/30 text-xs text-violet-400 font-medium">
+                        <i class="fa-solid fa-violin"></i> Musical Accomplishment
+                    </div>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white card-title">Violin Performance & Arts</h2>
+                    <p class="text-slate-300 card-text-muted leading-relaxed text-base">
+                        With over 12 years of formal violin training, classical performance serves as an grounding counterpart to statistical research.
+                    </p>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                        <div class="p-5 rounded-2xl glass-card border border-slate-800">
+                            <div class="w-10 h-10 rounded-xl bg-brand-500/10 flex items-center justify-center text-brand-400 text-lg mb-3">
+                                <i class="fa-solid fa-award"></i>
+                            </div>
+                            <h3 class="text-base font-bold text-white card-title">First Chair Violinist</h3>
+                            <p class="text-xs text-slate-400 card-text-muted mt-1">Thailand Waldorf Orchestra — Led the first violin section in orchestral performances and symphonic rehearsals.</p>
+                        </div>
+
+                        <div class="p-5 rounded-2xl glass-card border border-slate-800">
+                            <div class="w-10 h-10 rounded-xl bg-violetBrand-500/10 flex items-center justify-center text-violet-400 text-lg mb-3">
+                                <i class="fa-solid fa-graduation-cap"></i>
+                            </div>
+                            <h3 class="text-base font-bold text-white card-title">UCSD Music Minor</h3>
+                            <p class="text-xs text-slate-400 card-text-muted mt-1">Combining statistics coursework with advanced performance studies and music theory.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-5">
+                    <div class="relative rounded-2xl overflow-hidden glass-card p-8 border border-slate-800 text-center">
+                        <div class="w-20 h-20 mx-auto rounded-full bg-gradient-to-tr from-brand-500 to-violetBrand-500 flex items-center justify-center text-white text-3xl shadow-xl shadow-brand-500/20 mb-6">
+                            <i class="fa-solid fa-violin"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white card-title mb-2">12+ Years Violin</h3>
+                        <p class="text-xs text-slate-400 card-text-muted max-w-xs mx-auto mb-6">First Chair Violinist • Thailand Waldorf Orchestra</p>
+
+                        <div class="space-y-3 text-left border-t border-slate-800/80 pt-4 text-xs font-mono">
+                            <div class="flex justify-between items-center text-slate-300">
+                                <span>Violin Dedication</span>
+                                <span class="text-brand-400 font-bold">12+ Years</span>
+                            </div>
+                            <div class="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
+                                <div class="bg-brand-500 h-full w-full"></div>
+                            </div>
+
+                            <div class="flex justify-between items-center text-slate-300 pt-2">
+                                <span>Orchestral Leadership</span>
+                                <span class="text-violet-400 font-bold">1st Chair</span>
+                            </div>
+                            <div class="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
+                                <div class="bg-violetBrand-500 h-full w-[95%]"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-500/10 border border-brand-500/30 text-xs text-brand-400 font-medium mb-4">
+                <i class="fa-solid fa-envelope"></i> Reach Out
+            </div>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-white card-title mb-8">Get In Touch</h2>
+
+            <div class="glass-card p-6 sm:p-8 rounded-2xl max-w-lg mx-auto shadow-2xl border border-slate-800">
+                <p class="text-xs text-slate-400 card-text-muted mb-2 font-mono uppercase tracking-wider">Contact Email</p>
+                <div class="flex items-center justify-between gap-3 bg-slate-950 p-3 rounded-xl border border-slate-800">
+                    <span class="text-white font-mono text-sm sm:text-base font-bold truncate">shreya@ucsd.edu</span>
+                    <button onclick="copyToClipboard('shreya@ucsd.edu')" 
+                            id="copyBtn" 
+                            class="px-4 py-2 bg-brand-600 hover:bg-brand-500 text-white rounded-lg text-xs font-semibold transition-all shrink-0 flex items-center gap-2">
+                        <i class="fa-regular fa-copy"></i> Copy Email
+                    </button>
+                </div>
+                <div id="copyAlert" class="hidden text-xs text-emerald-400 mt-3 font-medium">
+                    <i class="fa-solid fa-circle-check"></i> Copied to clipboard!
+                </div>
+                
+                <div class="mt-6 pt-6 border-t border-slate-800/80 flex justify-center">
+                    <a href="mailto:shreya@ucsd.edu" class="inline-flex items-center gap-2 text-xs font-bold text-brand-400 hover:underline">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i> Send an email directly
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal Lightbox Overlay -->
+    <div id="lightboxModal" class="fixed inset-0 z-50 hidden bg-slate-950/90 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="relative max-w-4xl w-full bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-2xl flex flex-col">
+            <div class="flex items-center justify-between p-4 border-b border-slate-800 bg-slate-950">
+                <div>
+                    <h3 id="modalTitle" class="text-base font-bold text-white">Visualization View</h3>
+                    <p id="modalDesc" class="text-xs text-slate-400">Lottery Data Plot</p>
+                </div>
+                <button onclick="closeLightbox()" class="text-slate-400 hover:text-white p-2 rounded-lg bg-slate-900 hover:bg-slate-800 transition-colors">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+            <div id="modalContent" class="p-6 bg-slate-950 flex justify-center items-center">
+                <img id="modalImg" src="" alt="Enlarged Visualization" class="max-h-[70vh] w-auto object-contain rounded-lg">
+            </div>
+            <div class="p-4 border-t border-slate-800 bg-slate-900 text-right">
+                <button onclick="closeLightbox()" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold rounded-lg transition-colors">
+                    Close View
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="py-8 bg-slate-950 border-t border-slate-900 text-center text-xs text-slate-500">
+        <div class="max-w-7xl mx-auto px-4">
+            <p>© <span id="year"></span> Shreya Kumar. UC San Diego Data Science & Statistics.</p>
+        </div>
+    </footer>
+
+    <!-- Interactive Scripts -->
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Mobile Nav Drawer Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        mobileMenuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+        });
+
+        // Theme Switcher
+        const themeToggleBtn = document.getElementById('themeToggle');
+        const htmlElem = document.documentElement;
+        themeToggleBtn.addEventListener('click', () => {
+            if (htmlElem.classList.contains('dark')) {
+                htmlElem.classList.remove('dark');
+                htmlElem.classList.add('light');
+            } else {
+                htmlElem.classList.remove('light');
+                htmlElem.classList.add('dark');
+            }
+        });
+
+        // Lightbox Modal Handling
+        function openLightbox(imgSrc, title, description) {
+            const modalImg = document.getElementById('modalImg');
+            modalImg.src = imgSrc;
+            
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalDesc').textContent = description;
+            document.getElementById('lightboxModal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightboxModal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        document.getElementById('lightboxModal').addEventListener('click', (e) => {
+            if (e.target.id === 'lightboxModal') closeLightbox();
+        });
+
+        // Clipboard Copy
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                const copyAlert = document.getElementById('copyAlert');
+                const copyBtn = document.getElementById('copyBtn');
+                
+                copyAlert.classList.remove('hidden');
+                copyBtn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+                copyBtn.classList.remove('bg-brand-600');
+                copyBtn.classList.add('bg-emerald-600');
+
+                setTimeout(() => {
+                    copyAlert.classList.add('hidden');
+                    copyBtn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy Email';
+                    copyBtn.classList.remove('bg-emerald-600');
+                    copyBtn.classList.add('bg-brand-600');
+                }, 3000);
+            });
+        }
+    </script>
+</body>
+</html>
